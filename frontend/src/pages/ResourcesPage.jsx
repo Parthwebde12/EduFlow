@@ -220,7 +220,7 @@ export default function ResourcesPage() {
                       {r.owner?.profilePhoto?.url ? (
                         <img src={r.owner.profilePhoto.url} alt="" className="w-4 h-4 rounded-full" />
                       ) : (
-                        <div className="w-4 h-4 rounded-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
+                        <div className="w-4 h-4 rounded-full bg-linear-to-br from-primary-400 to-accent-400 flex items-center justify-center">
                           <span className="text-white" style={{ fontSize: 8 }}>
                             {r.owner?.name?.charAt(0)}
                           </span>

@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('studysync_token'));
 
-  // Fetch current user
   const fetchUser = useCallback(async () => {
     if (!token) {
       setLoading(false);
@@ -27,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   useEffect(() => {
-    fetchUser();
+    fetchUser();  //eslint error not react error app works in prod
   }, [fetchUser]);
 
   const login = async (email, password) => {
@@ -65,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => {
+export const useAuth = () => {  //same here too
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');
   return ctx;
