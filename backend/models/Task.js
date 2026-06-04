@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-
-const taskSchema= new mongoose.Schema({
-    title: String,
-    required: [true,'TASK title required'],
-    trim: true,
-    maxlenght:[50,'Title should not exceed 50 charecter'],
-},
-description: {
+const taskSchema = new mongoose.Schema({
+  title: {
     type: String,
-    maxlenght:[400,'Description must not exeed 400 charecters'],
-    default:' '
-},
-priority: {
+    required: [true, 'Task title is required'],
+    trim: true,
+    maxlength: [100, 'Title cannot exceed 100 characters']
+  },
+  description: {
+    type: String,
+    maxlength: [300, 'Description cannot exceed 300 characters'],
+    default: ''
+  },
+  priority: {
     type: String,
     enum: ['low', 'medium', 'high', 'urgent'],
     default: 'medium'
@@ -46,5 +46,3 @@ priority: {
 });
 
 module.exports = mongoose.model('Task', taskSchema);
-
-
