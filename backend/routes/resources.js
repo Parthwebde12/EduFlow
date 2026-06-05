@@ -1,0 +1,11 @@
+const express = require('express');
+const { getResources, createResource, toggleLike, deleteResource } = require('../controllers/resourceController');
+const { protect } = require('../middleware/auth');
+const { uploadResource } = require('../config/cloudinary');
+const router = express.Router();
+router.use(protect);
+router.get('/', getResources);
+router.post('/', uploadResource.single('file'), createResource);
+router.post('/:id/like', toggleLike);
+router.delete('/:id', deleteResource);
+module.exports = router;

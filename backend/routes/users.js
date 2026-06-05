@@ -1,0 +1,11 @@
+const express = require('express');
+const { getProfile, updateProfile, uploadProfilePhoto, changePassword } = require('../controllers/userController');
+const { protect } = require('../middleware/auth');
+const { uploadProfile } = require('../config/cloudinary');
+const router = express.Router();
+router.use(protect);
+router.get('/profile', getProfile);
+router.put('/profile', updateProfile);
+router.put('/profile/photo', uploadProfile.single('photo'), uploadProfilePhoto);
+router.put('/password', changePassword);
+module.exports = router;
