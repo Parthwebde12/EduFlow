@@ -10,7 +10,7 @@ const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
 const notesRoutes = require('./routes/notes');
 const resourcesRoutes = require('./routes/resources');
-const taskRoutes = require('./routes/task');
+const taskRoutes = require('./routes/tasks');
 const userRoutes = require('./routes/users');
 
 const app = express();
