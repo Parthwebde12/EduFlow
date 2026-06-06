@@ -117,7 +117,7 @@ export default function ProfilePage() {
           <div>
             <label className="label flex items-center gap-1.5"><BookOpen size={13} /> Bio</label>
             <textarea className="input resize-none" rows={3} placeholder="Tell the community about yourself..."
-              value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} maxLength={200} />
+              value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} maxLength={100} />
             <p className="text-xs text-slate-400 mt-1">{form.bio.length}/200</p>
           </div>
           <div>

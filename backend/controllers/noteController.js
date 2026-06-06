@@ -65,7 +65,10 @@ const deleteNote = async (req, res) => {
   try {
     const note = await Note.findOne({ _id: req.params.id, owner: req.user._id });
     if (!note) return res.status(404).json({ success: false, message: 'Note not found.' });
-    if (note.file.publicId) await cloudinary.uploader.destroy(note.file.publicId, { resource_type: 'auto' });
+    if (note.file.publicId) {
+  const fileType = note.file.fileType?.includes('pdf') ? 'raw' : 'image';
+  await cloudinary.uploader.destroy(note.file.publicId, { resource_type: fileType });
+}
     await note.deleteOne();
     res.json({ success: true, message: 'Note deleted successfully!' });
   } catch (error) {

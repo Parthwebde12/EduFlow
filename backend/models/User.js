@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
 
     bio: {
       type: String,
-      maxlength: [100, 'Bio should not exceed 100 characters']
+      maxlength: [500, 'Bio should not exceed 500 characters']
     },
 
     college: {

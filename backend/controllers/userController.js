@@ -21,9 +21,10 @@ const updateProfile = async (req, res) => {
       updateData.skills = Array.isArray(skills) ? skills : skills.split(',').map(s => s.trim()).filter(Boolean);
     }
     if (theme) updateData.theme = theme;
-    const user = await User.findByIdAndUpdate(req.user._id, updateData, { new: true, runValidators: true });
+    const user = await User.findByIdAndUpdate(req.user._id, updateData, { returnDocument: 'after', runValidators: true });
     res.json({ success: true, message: 'Profile updated successfully!', user: user.toSafeObject() });
   } catch (error) {
+    console.error('UPDATE PROFILE ERROR:', error);
     res.status(500).json({ success: false, message: 'Failed to update profile.' });
   }
 };
