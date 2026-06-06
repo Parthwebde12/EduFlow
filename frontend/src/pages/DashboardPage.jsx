@@ -51,14 +51,13 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 max-w-7xl">
-      {/* Welcome header */}
-      <div className="bg-linear-to-r from-primary-600 to-accent-600 rounded-2xl p-6 text-white shadow-lg">
+      <div className="bg-linear-to-r from-primary-600 to-accent-600 rounded-2xl p-6 text-black shadow-lg">
         <h2 className="font-display text-2xl font-bold mb-1">
           {getGreeting()}, {user?.name?.split(' ')[0]}! 
         </h2>
         <p className="opacity-90 text-sm">
           {stats?.pendingTasks > 0
-            ? `You have ${stats.pendingTasks} pending task${stats.pendingTasks > 1 ? 's' : ''} — let's crush it!`
+            ? `You have ${stats.pendingTasks} pending task${stats.pendingTasks > 1 ? 's' : ''} , let's crush it!`
             : 'All tasks complete! Great work today.'}
         </p>
         {stats?.taskCompletionRate > 0 && (
@@ -67,9 +66,9 @@ export default function DashboardPage() {
               <span>Task completion rate</span>
               <span>{stats.taskCompletionRate}%</span>
             </div>
-            <div className="w-full bg-white/20 rounded-full h-2">
+            <div className="w-full bg-red/40 rounded-full h-2">
               <div
-                className="bg-white rounded-full h-2 transition-all duration-500"
+                className=" rounded-full h-2 transition-all duration-500 bg-red-400"
                 style={{ width: `${stats.taskCompletionRate}%` }}
               />
             </div>
@@ -77,7 +76,6 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Stats grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           title="Total Notes"
@@ -109,7 +107,6 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Task status breakdown */}
       {stats?.totalTasks > 0 && (
         <div className="card p-5">
           <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Task Overview</h3>
@@ -131,7 +128,6 @@ export default function DashboardPage() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Notes */}
         <div className="card p-5">
           <div className="flex items-center gap-2 mb-4">
             <FileText size={18} className="text-primary-500" />
@@ -159,7 +155,6 @@ export default function DashboardPage() {
           )}
         </div>
 
-        {/* Upcoming Tasks */}
         <div className="card p-5">
           <div className="flex items-center gap-2 mb-4">
             <Clock size={18} className="text-accent-500" />

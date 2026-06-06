@@ -11,7 +11,7 @@ cloudinary.config({
 const noteStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'studysync/notes',
+    folder: 'Eduflow/notes',
     allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'webp'],
     resource_type: 'auto'
   }
@@ -20,7 +20,7 @@ const noteStorage = new CloudinaryStorage({
 const profileStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'studysync/profiles',
+    folder: 'Eduflow/profiles',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
     transformation: [{ width: 400, height: 400, crop: 'fill' }]
   }
@@ -29,7 +29,7 @@ const profileStorage = new CloudinaryStorage({
 const resourceStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'studysync/resources',
+    folder: 'Eduflow/resources',
     allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'doc', 'docx', 'ppt', 'pptx'],
     resource_type: 'auto'
   }

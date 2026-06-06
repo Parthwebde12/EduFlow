@@ -29,23 +29,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50
+     to-purple-50 dark:from-slate-950 dark:via-slate-900
+     dark:to-slate-900 flex items-center justify-center p-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-100 dark:bg-primary-900/20 rounded-full blur-3xl opacity-60" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-100 dark:bg-accent-900/20 rounded-full blur-3xl opacity-60" />
       </div>
 
       <div className="relative w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-linear-to-br from-primary-500 to-accent-500 rounded-2xl mb-4 shadow-lg">
-            <GraduationCap size={28} className="text-white" />
-          </div>
-          <h1 className="font-display text-3xl font-bold text-slate-900 dark:text-white">EduFlow</h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">Your student productivity hub</p>
-        </div>
+        
+      
+      <div className="text-center mb-8">
+  <div className="inline-flex items-center justify-center w-14 h-14 bg-linear-to-br
+   from-primary-500 to-accent-500 rounded-2xl mb-4 shadow-lg">
+    <GraduationCap size={28} className="text-red-500" />
+  </div>
+  <h1 className="font-display text-3xl font-bold text-slate-900 dark:text-white">
+    EduFlow
+  </h1>
+  <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+    Your student productivity hub
+  </p>
+</div>
 
-        {/* Card */}
         <div className="card p-8 shadow-xl">
           <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">Sign in to your account</h2>
 
@@ -78,7 +85,8 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400
+                   hover:text-slate-600 dark:hover:text-slate-300"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>

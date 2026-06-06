@@ -8,7 +8,7 @@ const CATEGORIES = ['Textbooks','Lecture slides','research paper','practice prob
             type: String,
             required: [true,'Resource title is must'],
 trim : true,
-maxlenght:[100,'Title should not exceed 100 chardcters']
+maxlength:[100,'Title should not exceed 100 chardcters']
         },
         description: {
             type: String,
@@ -70,4 +70,4 @@ maxlenght:[100,'Title should not exceed 100 chardcters']
         })
 
 
-        module.exports = mongoose.model('Resource'.resourceSchema)
+        module.exports = mongoose.model('Resource', resourceSchema)

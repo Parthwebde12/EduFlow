@@ -1,7 +1,6 @@
 import { useAuth } from '../../context/Authcontext';
 import { NavLink, useNavigate } from 'react-router-dom';
-import {LayoutDashboard, FileText, BookOpen, CheckSquare,User, LogOut, GraduationCap, Sparkles, MessageSquare,Calendar, X} from 'lucide-react';
-
+import { LayoutDashboard, FileText, BookOpen, CheckSquare, User, LogOut, GraduationCap, Sparkles, MessageSquare, Calendar, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const navItems = [
@@ -30,7 +29,6 @@ export default function Sidebar({ isOpen, onClose }) {
 
   return (
     <>
-      
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 lg:hidden"
@@ -38,20 +36,19 @@ export default function Sidebar({ isOpen, onClose }) {
         />
       )}
 
-     
       <aside className={`
-        sidebar bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800
-        flex flex-col
+        sidebar flex flex-col
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0
       `}>
-        
-        <div className="flex items-center justify-between px-5 py-5 border-b border-slate-100 dark:border-slate-800">
+
+        {/* Logo */}
+        <div className="flex items-center justify-between px-5 py-5 border-b border-slate-200/60 dark:border-red-950">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-linear-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
               <GraduationCap size={16} className="text-white" />
             </div>
-            <span className="font-display text-xl font-bold text-slate-900 dark:text-white">
+            <span className="text-xl font-bold text-slate-900 dark:text-red-50">
               EduFlow
             </span>
           </div>
@@ -60,9 +57,10 @@ export default function Sidebar({ isOpen, onClose }) {
           </button>
         </div>
 
-        <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+        {/* User */}
+        <div className="px-4 py-3 border-b border-slate-200/60 dark:border-red-950">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-linear-to-br from-primary-400 to-accent-400 flex items-center justify-center shrink-0 overflow-hidden">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shrink-0 overflow-hidden">
               {user?.profilePhoto?.url ? (
                 <img src={user.profilePhoto.url} alt={user.name} className="w-full h-full object-cover" />
               ) : (
@@ -72,15 +70,15 @@ export default function Sidebar({ isOpen, onClose }) {
               )}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">{user?.name}</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{user?.college || 'Student'}</p>
+              <p className="text-sm font-semibold text-slate-900 dark:text-red-50 truncate">{user?.name}</p>
+              <p className="text-xs text-slate-500 dark:text-red-200/50 truncate">{user?.college || 'Student'}</p>
             </div>
           </div>
         </div>
 
-        
+        {/* Nav */}
         <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto custom-scroll">
-          <p className="px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
+          <p className="px-3 text-xs font-semibold text-slate-400 dark:text-red-200/30 uppercase tracking-wider mb-2">
             Main
           </p>
 
@@ -98,7 +96,7 @@ export default function Sidebar({ isOpen, onClose }) {
             </NavLink>
           ))}
 
-          <p className="px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-5 mb-2">
+          <p className="px-3 text-xs font-semibold text-slate-400 dark:text-red-200/30 uppercase tracking-wider mt-5 mb-2">
             Coming Soon
           </p>
 
@@ -106,7 +104,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <div key={label} className="nav-item opacity-50 cursor-not-allowed">
               <Icon size={18} />
               <span>{label}</span>
-              <span className="ml-auto text-xs bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded-full">
+              <span className="ml-auto text-xs bg-slate-100 dark:bg-red-950 text-slate-500 dark:text-red-400/60 px-2 py-0.5 rounded-full">
                 {badge}
               </span>
             </div>
@@ -114,7 +112,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </nav>
 
         {/* Logout */}
-        <div className="px-3 pb-4 border-t border-slate-100 dark:border-slate-800 pt-4">
+        <div className="px-3 pb-4 border-t border-slate-200/60 dark:border-red-950 pt-4">
           <button
             onClick={handleLogout}
             className="nav-item w-full text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600"
@@ -123,6 +121,7 @@ export default function Sidebar({ isOpen, onClose }) {
             Sign Out
           </button>
         </div>
+
       </aside>
     </>
   );
