@@ -13,7 +13,7 @@ const noteStorage = new CloudinaryStorage({
   params: {
     folder: 'Eduflow/notes',
     allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'webp'],
-    resource_type: 'auto'
+   
   }
 });
 
@@ -31,7 +31,7 @@ const resourceStorage = new CloudinaryStorage({
   params: {
     folder: 'Eduflow/resources',
     allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'doc', 'docx', 'ppt', 'pptx'],
-    resource_type: 'auto'
+    
   }
 });
 

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
-const CATEGORIES = ['Textbooks','Lecture slides','research paper','practice problem','cheat sheets',
-    'videos','files','tools','others'];
+const CATEGORIES = [
+  'Textbooks', 'Lecture Slides', 'Research Papers','Practice Problems', 'Cheat Sheets', 'Videos','Websites', 'Tools', 'Other'
+];
 
     const resourceSchema= new mongoose.Schema({
         title:{

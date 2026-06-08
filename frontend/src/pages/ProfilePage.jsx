@@ -76,7 +76,7 @@ export default function ProfilePage() {
 
   return (
     <div className="space-y-6 max-w-2xl">
-      {/* Avatar section */}
+      
       <div className="card p-6 flex items-center gap-5">
         <div className="relative shrink-0">
           <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-primary-400 to-accent-400 flex items-center justify-center overflow-hidden">
@@ -98,7 +98,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Edit profile form */}
+      
       <div className="card p-6">
         <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
           <User size={18} className="text-primary-500" /> Edit Profile
@@ -117,7 +117,7 @@ export default function ProfilePage() {
           <div>
             <label className="label flex items-center gap-1.5"><BookOpen size={13} /> Bio</label>
             <textarea className="input resize-none" rows={3} placeholder="Tell the community about yourself..."
-              value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} maxLength={100} />
+              value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} maxLength={200} />
             <p className="text-xs text-slate-400 mt-1">{form.bio.length}/200</p>
           </div>
           <div>
@@ -131,7 +131,7 @@ export default function ProfilePage() {
         </form>
       </div>
 
-      {/* Skills preview */}
+      
       {user?.skills?.length > 0 && (
         <div className="card p-5">
           <h3 className="font-semibold text-slate-900 dark:text-white mb-3">Your Skills</h3>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
         </div>
       )}
 
-      {/* Change password */}
+      
       <div className="card p-6">
         <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
           <Key size={18} className="text-accent-500" /> Change Password
