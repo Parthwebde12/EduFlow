@@ -97,7 +97,7 @@ welcome.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for full guidelines, and check out
+See [CONTRIBUTING.md](./contributing.md) for full guidelines, and check out
 the [good first issues](https://github.com/Parthwebde12/EduFlow/issues) if
 you're new here.
 
