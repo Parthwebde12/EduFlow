@@ -1,184 +1,136 @@
-﻿# EduFlow
+﻿<div align="center">
 
-A student productivity platform for managing notes, resources, and tasks — all in one place.
+# 📚 EduFlow
 
----
+**A student productivity platform for managing notes, resources, and tasks — all in one place.**
 
-## What it does
+Built with React, Node.js, Express.js, and MongoDB. 🏆 Originally developed for the Open Source Hackathon organized by Elite Coders.
 
-EduFlow helps students stay organized throughout their academic journey. Upload your notes, share study resources with your community, track tasks with a kanban board, and monitor your progress from a single dashboard.
+[![Stars](https://img.shields.io/github/stars/Parthwebde12/EduFlow?style=for-the-badge&color=yellow)](https://github.com/Parthwebde12/EduFlow/stargazers)
+[![Forks](https://img.shields.io/github/forks/Parthwebde12/EduFlow?style=for-the-badge&color=blue)](https://github.com/Parthwebde12/EduFlow/network/members)
+[![Issues](https://img.shields.io/github/issues/Parthwebde12/EduFlow?style=for-the-badge&color=orange)](https://github.com/Parthwebde12/EduFlow/issues)
+[![License](https://img.shields.io/github/license/Parthwebde12/EduFlow?style=for-the-badge&color=green)](./LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](./CONTRIBUTING.md)
 
-- **Notes** — Upload PDFs and images, search by subject, track downloads
-- **Resources** — Share links and files with the study community, like and discover materials
-- **Tasks** — Kanban board with priorities, due dates, and status tracking
-- **Dashboard** — Stats overview, recent activity, upcoming deadlines
-- **Profile** — Edit your info, upload a photo, change your password
-- **Dark mode** — Full dark/light theme toggle
+**[⭐ Star this repo](https://github.com/Parthwebde12/EduFlow) if you find it useful — it helps a lot and takes 2 seconds!**
 
----
-
-## Tech stack
-
-**Frontend**
-- React 18
-- Vite
-- Tailwind CSS v4
-- React Router v6
-- Axios
-- date-fns
-- react-hot-toast
-- Lucide React
-
-**Backend**
-- Node.js + Express
-- MongoDB + Mongoose
-- JWT authentication
-- Cloudinary + Multer (file uploads)
-- bcryptjs
-- express-validator
-
-**Hosting**
-- Frontend → Vercel
-- Backend → Render
-- Database → MongoDB Atlas
-- Files → Cloudinary
+</div>
 
 ---
-## Video demo
+
+## ✨ Why EduFlow?
+
+Juggling notes, resources, and to-dos across five different apps is exhausting.
+**EduFlow** brings it all into a single, clean workspace built specifically for
+students — so you can focus on studying, not on managing tools.
+
+## 🚀 Features
+
+- 📝 **Notes** — create, organize, and manage study notes
+- 📂 **Resources** — store and access learning material in one place
+- ✅ **Tasks** — track assignments and deadlines
+- 🔐 **Authentication** — secure user accounts
+- 💻 **Full-stack** — React frontend + Express/Node.js backend + MongoDB
 
 
-https://github.com/user-attachments/assets/87aea24a-7dcd-4fed-9080-006e83ca6ef5
+## 🛠️ Tech Stack
 
+| Layer     | Technology         |
+|-----------|--------------------|
+| Frontend  | React              |
+| Backend   | Node.js, Express.js|
+| Database  | MongoDB            |
+| Auth      | JWT                |
 
-
-## Getting started locally
+## ⚡ Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account
-- Cloudinary account
+- Node.js (v18+ recommended)
+- MongoDB (local or Atlas)
+- npm or yarn
 
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/yourusername/eduflow.git
-cd eduflow
-```
-
-### 2. Set up the backend
+### Installation
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/Parthwebde12/EduFlow.git
+cd EduFlow
+
+# 2. Install backend dependencies
 cd backend
-npm install --legacy-peer-deps
-```
+npm install
 
-Create `backend/.env`:
-
-```env
-PORT=5000
-NODE_ENV=development
-MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.xxxxx.mongodb.net/eduflow?retryWrites=true&w=majority
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRE=7d
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-CLIENT_URL=http://localhost:5173
-```
-
-Start the backend:
-
-```bash
-node index.js
-```
-
-You should see:
-```
-Connected to MongoDB
-EduFlow server running on port 5000
-```
-
-### 3. Set up the frontend
-
-```bash
-cd frontend
+# 3. Install frontend dependencies
+cd ../frontend
 npm install
 ```
 
-Create `frontend/.env`:
+### Environment Variables
 
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-Start the frontend:
+Copy `.env.example` to `.env` in the `backend` folder and fill in your values:
 
 ```bash
+cp .env.example .env
+```
+
+### Run locally
+
+```bash
+# In /backend
+npm run dev
+
+# In /frontend (separate terminal)
 npm run dev
 ```
 
-Open `http://localhost:5173`
+The app should now be running locally ,check your terminal output for the exact ports.
 
----
+## 🤝 Contributing
 
-## Project structure
+Contributions are what make the open-source community amazing! Whether it's
+fixing a bug, adding a feature, or improving docs — all contributions are
+welcome.
 
-```
-eduflow/
-├── backend/
-│   ├── config/          # Cloudinary config
-│   ├── controllers/     # Route handlers
-│   ├── middleware/      # Auth + validation
-│   ├── models/          # Mongoose schemas
-│   ├── routes/          # Express routes
-│   └── index.js         # Entry point
-│
-└── frontend/
-    └── src/
-        ├── components/
-        │   ├── layout/  # AppLayout, Sidebar, Topbar
-        │   └── ui/      # Modal, StatCard, EmptyState, etc.
-        ├── context/     # AuthContext, ThemeContext
-        ├── pages/       # All page components
-        ├── services/    # API service layer
-        └── App.jsx
-```
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
----
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for full guidelines, and check out
+the [good first issues](https://github.com/Parthwebde12/EduFlow/issues) if
+you're new here.
 
-## Environment variables
+## 🗺️ Roadmap
 
-| Variable | Where | Description |
-|----------|-------|-------------|
-| `MONGODB_URI` | backend | MongoDB Atlas connection string |
-| `JWT_SECRET` | backend | Secret key for signing JWT tokens |
-| `JWT_EXPIRE` | backend | Token expiry e.g. `7d` |
-| `CLOUDINARY_CLOUD_NAME` | backend | Cloudinary cloud name |
-| `CLOUDINARY_API_KEY` | backend | Cloudinary API key |
-| `CLOUDINARY_API_SECRET` | backend | Cloudinary API secret |
-| `CLIENT_URL` | backend | Frontend URL for CORS |
-| `PORT` | backend | Server port (default 5000) |
-| `VITE_API_URL` | frontend | Backend API base URL |
+- [ ] Dark mode
+- [ ] File attachments for notes
+- [ ] Reminders / notifications for tasks
+- [ ] Mobile-responsive UI polish
+- [ ] Deployed live demo link
 
----
+> Have an idea? [Open a feature request](https://github.com/Parthwebde12/EduFlow/issues/new/choose)!
 
-## Deployment
+## 🐛 Found a bug?
 
-**Backend → Render**
-- Root directory: `backend`
-- Build command: `npm install --legacy-peer-deps`
-- Start command: `node index.js`
-- Add all backend env variables in the Environment tab
+Please open an [issue](https://github.com/Parthwebde12/EduFlow/issues/new/choose)
+with steps to reproduce it. See [SECURITY.md](./SECURITY.md) for reporting
+security vulnerabilities privately.
 
-**Frontend → Vercel**
-- Root directory: `frontend`
-- Framework: Vite
-- Add `VITE_API_URL` pointing to your Render URL
+## 📄 License
 
-After deploying both, update `CLIENT_URL` in Render to your Vercel URL and redeploy.
+This project is licensed under the [MIT License](./LICENSE).
 
----
+## 🙌 Show your support
 
-## License
+If EduFlow helped you or you like where it's headed, please consider giving
+it a **⭐ star** — it genuinely helps the project get discovered and
+motivates continued development!
 
-MIT
+<div align="center">
+
+**[⭐ Star EduFlow on GitHub](https://github.com/Parthwebde12/EduFlow)**
+
+Made with ❤️ by [Parthwebde12](https://github.com/Parthwebde12) and [contributors](https://github.com/Parthwebde12/EduFlow/graphs/contributors)
+
+</div>
