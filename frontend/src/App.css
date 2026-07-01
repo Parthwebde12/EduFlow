@@ -4,7 +4,7 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-red-50:  #fff1f2;
+  --color-red-50: #fff1f2;
   --color-red-100: #ffe4e6;
   --color-red-500: #ef4444;
   --color-red-600: #dc2626;
@@ -14,7 +14,10 @@
 }
 
 @layer base {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -37,7 +40,10 @@
     color: #f0e8e8;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.3;
@@ -60,7 +66,15 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+
+  /* Hide Microsoft Edge password reveal button */
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
 }
+
+
 
 @layer components {
 
@@ -69,12 +83,12 @@
   .btn-primary {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all duration-150 select-none;
     background: #dc2626;
-    box-shadow: 0 1px 2px rgba(220, 38, 38, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    box-shadow: 0 1px 2px rgba(220, 38, 38, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .btn-primary:hover {
     background: #b91c1c;
-    box-shadow: 0 3px 8px rgba(220, 38, 38, 0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+    box-shadow: 0 3px 8px rgba(220, 38, 38, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transform: translateY(-1px);
   }
 
@@ -323,20 +337,49 @@
 /* ── Animations ── */
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(5px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.97); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes slide-in-left {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.animate-fade-in       { animation: fade-in       0.2s ease-out both; }
-.animate-scale-in      { animation: scale-in      0.15s ease-out both; }
-.animate-slide-in-left { animation: slide-in-left 0.2s ease-out both; }
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.15s ease-out both;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.2s ease-out both;
+}
