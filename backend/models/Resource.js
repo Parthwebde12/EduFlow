@@ -9,7 +9,7 @@ const CATEGORIES = [
             type: String,
             required: [true,'Resource title is must'],
 trim : true,
-maxlength:[100,'Title should not exceed 100 chardcters']
+maxlength:[100,'Title should not exceed 100 characters']
         },
         description: {
             type: String,
@@ -56,11 +56,12 @@ maxlength:[100,'Title should not exceed 100 chardcters']
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
           }],
-          owner: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
-          }
+         owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+    index: true // <-- Add this line!
+}
         }, {
           timestamps: true
         });
