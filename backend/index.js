@@ -3,8 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
-
-
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
@@ -15,10 +15,13 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 
+app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));   
+// Integrate rate limiting to prevent abuse
 
 app.use('/api/auth', authRoutes);
 app.use('/api/dashboard', dashboardRoutes);
