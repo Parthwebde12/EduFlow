@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FileText, BookOpen, CheckSquare, TrendingUp, Clock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/Authcontext';
 import api from '../services/api';
@@ -51,9 +51,9 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 max-w-7xl">
-      <div className="bg-linear-to-r from-primary-600 to-accent-600 rounded-2xl p-6 text-black shadow-lg">
+      <div className="bg-linear-to-r from-primary-600 to-accent-600 rounded-2xl p-6 text-slate-900 dark:text-white shadow-lg">
         <h2 className="font-display text-2xl font-bold mb-1">
-          {getGreeting()}, {user?.name?.split(' ')[0]}! 
+          {getGreeting()}, {user?.name?.split(' ')[0]}!
         </h2>
         <p className="opacity-90 text-sm">
           {stats?.pendingTasks > 0
@@ -174,13 +174,12 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   {task.dueDate && (
-                    <div className={`text-xs shrink-0 flex items-center gap-1 ${
-                      isToday(new Date(task.dueDate))
-                        ? 'text-orange-500 font-medium'
-                        : isPast(new Date(task.dueDate))
+                    <div className={`text-xs shrink-0 flex items-center gap-1 ${isToday(new Date(task.dueDate))
+                      ? 'text-orange-500 font-medium'
+                      : isPast(new Date(task.dueDate))
                         ? 'text-red-500'
                         : 'text-slate-400'
-                    }`}>
+                      }`}>
                       {isToday(new Date(task.dueDate)) && <AlertCircle size={12} />}
                       {format(new Date(task.dueDate), 'MMM d')}
                     </div>
