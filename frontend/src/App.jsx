@@ -13,6 +13,7 @@ import TasksPage from './pages/TasksPage';
 import ProfilePage from './pages/ProfilePage';
 import { Toaster } from 'react-hot-toast';
 
+
 export default function App() {
   return (
     <BrowserRouter>
