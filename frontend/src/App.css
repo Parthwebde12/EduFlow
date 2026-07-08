@@ -10,6 +10,20 @@
   --color-red-600: #dc2626;
   --color-red-700: #b91c1c;
 
+  --color-primary-50: #fff1f2;
+  --color-primary-100: #ffe4e6;
+  --color-primary-400: #f87171;
+  --color-primary-500: #ef4444;
+  --color-primary-600: #dc2626;
+  --color-primary-700: #b91c1c;
+  --color-primary-900: #7f1d1d;
+
+  --color-accent-100: #ffedd5;
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-900: #7c2d12;
+
   --font-sans: Inter, system-ui, -apple-system, sans-serif;
 }
 
@@ -295,8 +309,8 @@
 
   .glass {
     background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
@@ -382,4 +396,23 @@
 
 .animate-slide-in-left {
   animation: slide-in-left 0.2s ease-out both;
+}
+
+@keyframes tilt-glow {
+  0% {
+    transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    box-shadow: 0 10px 40px -10px rgba(239, 68, 68, 0.15), 0 0 20px rgba(249, 115, 22, 0.1);
+  }
+  50% {
+    transform: perspective(1200px) rotateY(3deg) rotateX(-1deg);
+    box-shadow: 0 20px 50px -10px rgba(239, 68, 68, 0.25), 0 0 30px rgba(249, 115, 22, 0.2);
+  }
+  100% {
+    transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    box-shadow: 0 10px 40px -10px rgba(239, 68, 68, 0.15), 0 0 20px rgba(249, 115, 22, 0.1);
+  }
+}
+
+.animate-tilt-glow {
+  animation: tilt-glow 8s ease-in-out infinite;
 }

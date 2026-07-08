@@ -4,6 +4,7 @@ import AppLayout from './components/layout/AppLayout';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
 import LoginPage from './pages/LoginPage';
+import LandingPage from './pages/LandingPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import NotesPage from './pages/NotesPage';
@@ -19,13 +20,13 @@ export default function App() {
       <Routes>
 
         {/* Public routes */}
+        <Route path="/" element={localStorage.getItem('Eduflow_token') ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/notes" element={<NotesPage />} />
             <Route path="/resources" element={<ResourcesPage />} />

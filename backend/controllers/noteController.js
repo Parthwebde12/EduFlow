@@ -78,7 +78,7 @@ const deleteNote = async (req, res) => {
 
 const trackDownload = async (req, res) => {
   try {
-    const note = await Note.findById(req.params.id);
+    const note = await Note.findOne({ _id: req.params.id, $or: [{ owner: req.user._id }, { isPublic: true }] });
     if (!note) return res.status(404).json({ success: false, message: 'Note not found.' });
     note.downloads += 1;
     await note.save();
