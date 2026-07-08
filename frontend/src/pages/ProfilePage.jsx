@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { Camera, Save, Key, User, BookOpen, Tag, Building } from 'lucide-react';
+import { Camera, Save, Key, User, BookOpen, Tag, Building, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/Authcontext';
 import api from '../services/api';
 import toast from 'react-hot-toast';
@@ -17,6 +17,7 @@ export default function ProfilePage() {
   });
   const [pwForm, setPwForm] = useState({ currentPassword: '', newPassword: '', confirm: '' });
   const [savingPw, setSavingPw] = useState(false);
+  const [showPw, setShowPw] = useState({ current: false, new: false, confirm: false });
 
   const handleProfileSave = async (e) => {
     e.preventDefault();
@@ -152,19 +153,46 @@ export default function ProfilePage() {
         </h3>
         <form onSubmit={handlePasswordChange} className="space-y-4">
           <div>
-            <label className="label">Current Password</label>
-            <input type="password" className="input" value={pwForm.currentPassword}
-              onChange={e => setPwForm(f => ({ ...f, currentPassword: e.target.value }))} required />
+            <label htmlFor="profile-current-password" className="label">Current Password</label>
+            <div className="relative">
+              <input id="profile-current-password" type={showPw.current ? 'text' : 'password'} className="input pr-12" value={pwForm.currentPassword}
+                onChange={e => setPwForm(f => ({ ...f, currentPassword: e.target.value }))} required />
+              <button
+                type="button"
+                onClick={() => setShowPw(s => ({ ...s, current: !s.current }))}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              >
+                {showPw.current ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
           <div>
-            <label className="label">New Password</label>
-            <input type="password" className="input" placeholder="Min. 6 characters" value={pwForm.newPassword}
-              onChange={e => setPwForm(f => ({ ...f, newPassword: e.target.value }))} required />
+            <label htmlFor="profile-new-password" className="label">New Password</label>
+            <div className="relative">
+              <input id="profile-new-password" type={showPw.new ? 'text' : 'password'} className="input pr-12" placeholder="Min. 6 characters" value={pwForm.newPassword}
+                onChange={e => setPwForm(f => ({ ...f, newPassword: e.target.value }))} required />
+              <button
+                type="button"
+                onClick={() => setShowPw(s => ({ ...s, new: !s.new }))}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              >
+                {showPw.new ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
           <div>
-            <label className="label">Confirm New Password</label>
-            <input type="password" className="input" value={pwForm.confirm}
-              onChange={e => setPwForm(f => ({ ...f, confirm: e.target.value }))} required />
+            <label htmlFor="profile-confirm-password" className="label">Confirm New Password</label>
+            <div className="relative">
+              <input id="profile-confirm-password" type={showPw.confirm ? 'text' : 'password'} className="input pr-12" value={pwForm.confirm}
+                onChange={e => setPwForm(f => ({ ...f, confirm: e.target.value }))} required />
+              <button
+                type="button"
+                onClick={() => setShowPw(s => ({ ...s, confirm: !s.confirm }))}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+              >
+                {showPw.confirm ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
           <button type="submit" disabled={savingPw} className="btn-primary flex items-center gap-2">
             {savingPw ? <LoadingSpinner size="sm" /> : <><Key size={15} /> Update Password</>}
