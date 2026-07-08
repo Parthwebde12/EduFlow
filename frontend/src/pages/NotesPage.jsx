@@ -220,8 +220,9 @@ export default function NotesPage() {
       <Modal isOpen={uploadModal} onClose={() => setUploadModal(false)} title="Upload Note">
         <form onSubmit={handleUpload} className="space-y-4">
           <div>
-            <label className="label">Title *</label>
+            <label htmlFor="note-title" className="label">Title *</label>
             <input
+              id="note-title"
               className="input"
               placeholder="e.g. Calculus Chapter 3 Notes"
               value={form.title}
@@ -231,8 +232,9 @@ export default function NotesPage() {
           </div>
 
           <div>
-            <label className="label">Subject *</label>
+            <label htmlFor="note-subject" className="label">Subject *</label>
             <input
+              id="note-subject"
               className="input"
               placeholder="e.g. Mathematics, Physics, CS101"
               value={form.subject}
@@ -242,8 +244,9 @@ export default function NotesPage() {
           </div>
 
           <div>
-            <label className="label">Description</label>
+            <label htmlFor="note-description" className="label">Description</label>
             <textarea
+              id="note-description"
               className="input resize-none"
               rows={2}
               placeholder="Brief description of the notes..."
@@ -253,8 +256,9 @@ export default function NotesPage() {
           </div>
 
           <div>
-            <label className="label">Tags (comma-separated)</label>
+            <label htmlFor="note-tags" className="label">Tags (comma-separated)</label>
             <input
+              id="note-tags"
               className="input"
               placeholder="e.g. exam, chapter3, formulas"
               value={form.tags}
@@ -263,8 +267,9 @@ export default function NotesPage() {
           </div>
 
           <div>
-            <label className="label">File * (PDF or Image, max 10MB)</label>
+            <label htmlFor="note-file" className="label">File * (PDF or Image, max 10MB)</label>
             <input
+              id="note-file"
               type="file"
               accept=".pdf,.jpg,.jpeg,.png,.webp"
               onChange={e => setForm(f => ({ ...f, file: e.target.files[0] }))}

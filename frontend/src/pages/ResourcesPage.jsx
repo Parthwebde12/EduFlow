@@ -285,15 +285,15 @@ export default function ResourcesPage() {
       <Modal isOpen={modal} onClose={() => setModal(false)} title="Share a Resource">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="label">Title *</label>
-            <input className="input" placeholder="e.g. MIT OpenCourseWare - Linear Algebra"
+            <label htmlFor="resource-title" className="label">Title *</label>
+            <input id="resource-title" className="input" placeholder="e.g. MIT OpenCourseWare - Linear Algebra"
               value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} required />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="label">Category *</label>
-              <select className="input" value={form.category}
+              <label htmlFor="resource-category" className="label">Category *</label>
+              <select id="resource-category" className="input" value={form.category}
                 onChange={e => setForm(f => ({ ...f, category: e.target.value }))}>
                 {CATEGORIES.filter(c => c !== 'All').map(c => (
                   <option key={c} value={c}>{c}</option>
@@ -301,15 +301,15 @@ export default function ResourcesPage() {
               </select>
             </div>
             <div>
-              <label className="label">Subject *</label>
-              <input className="input" placeholder="e.g. Mathematics"
+              <label htmlFor="resource-subject" className="label">Subject *</label>
+              <input id="resource-subject" className="input" placeholder="e.g. Mathematics"
                 value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} required />
             </div>
           </div>
 
           <div>
-            <label className="label">Description</label>
-            <textarea className="input resize-none" rows={2} placeholder="What is this resource about?"
+            <label htmlFor="resource-description" className="label">Description</label>
+            <textarea id="resource-description" className="input resize-none" rows={2} placeholder="What is this resource about?"
               value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} />
           </div>
 
@@ -333,22 +333,22 @@ export default function ResourcesPage() {
 
           {form.resourceType === 'link' ? (
             <div>
-              <label className="label">URL *</label>
-              <input className="input" type="url" placeholder="https://..."
+              <label htmlFor="resource-url" className="label">URL *</label>
+              <input id="resource-url" className="input" type="url" placeholder="https://..."
                 value={form.link} onChange={e => setForm(f => ({ ...f, link: e.target.value }))} required />
             </div>
           ) : (
             <div>
-              <label className="label">File *</label>
-              <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.ppt,.pptx"
+              <label htmlFor="resource-file" className="label">File *</label>
+              <input id="resource-file" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.ppt,.pptx"
                 onChange={e => setForm(f => ({ ...f, file: e.target.files[0] }))}
                 className="input cursor-pointer file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-primary-50 file:text-primary-700 file:text-sm" />
             </div>
           )}
 
           <div>
-            <label className="label">Tags (comma-separated)</label>
-            <input className="input" placeholder="e.g. free, video, beginner"
+            <label htmlFor="resource-tags" className="label">Tags (comma-separated)</label>
+            <input id="resource-tags" className="input" placeholder="e.g. free, video, beginner"
               value={form.tags} onChange={e => setForm(f => ({ ...f, tags: e.target.value }))} />
           </div>
 

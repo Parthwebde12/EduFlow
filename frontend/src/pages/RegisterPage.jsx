@@ -53,8 +53,9 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="label">Full Name</label>
+              <label htmlFor="register-name" className="label">Full Name</label>
               <input
+                id="register-name"
                 type="text"
                 name="name"
                 value={form.name}
@@ -66,8 +67,9 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="label">Email address</label>
+              <label htmlFor="register-email" className="label">Email address</label>
               <input
+                id="register-email"
                 type="email"
                 name="email"
                 value={form.email}
@@ -79,8 +81,9 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="label">College / University</label>
+              <label htmlFor="register-college" className="label">College / University</label>
               <input
+                id="register-college"
                 type="text"
                 name="college"
                 value={form.college}
@@ -91,9 +94,10 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="label">Password</label>
+              <label htmlFor="register-password" className="label">Password</label>
               <div className="relative">
                 <input
+                  id="register-password"
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={form.password}

@@ -334,8 +334,9 @@ export default function TasksPage() {
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="label">Title *</label>
+            <label htmlFor="task-title" className="label">Title *</label>
             <input
+              id="task-title"
               className="input"
               placeholder="e.g. Read Chapter 5 — Algorithms"
               value={form.title}
@@ -345,8 +346,9 @@ export default function TasksPage() {
           </div>
 
           <div>
-            <label className="label">Subject</label>
+            <label htmlFor="task-subject" className="label">Subject</label>
             <input
+              id="task-subject"
               className="input"
               placeholder="e.g. Data Structures"
               value={form.subject}
@@ -355,8 +357,9 @@ export default function TasksPage() {
           </div>
 
           <div>
-            <label className="label">Description</label>
+            <label htmlFor="task-description" className="label">Description</label>
             <textarea
+              id="task-description"
               className="input resize-none"
               rows={2}
               placeholder="Additional details..."
@@ -367,8 +370,9 @@ export default function TasksPage() {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="label">Priority</label>
+              <label htmlFor="task-priority" className="label">Priority</label>
               <select
+                id="task-priority"
                 className="input"
                 value={form.priority}
                 onChange={e => setForm(f => ({ ...f, priority: e.target.value }))}
@@ -381,8 +385,9 @@ export default function TasksPage() {
               </select>
             </div>
             <div>
-              <label className="label">Status</label>
+              <label htmlFor="task-status" className="label">Status</label>
               <select
+                id="task-status"
                 className="input"
                 value={form.status}
                 onChange={e => setForm(f => ({ ...f, status: e.target.value }))}
@@ -395,8 +400,9 @@ export default function TasksPage() {
           </div>
 
           <div>
-            <label className="label">Due Date</label>
+            <label htmlFor="task-duedate" className="label">Due Date</label>
             <input
+              id="task-duedate"
               type="date"
               className="input"
               value={form.dueDate}
