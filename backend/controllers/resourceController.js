@@ -42,6 +42,12 @@ const toggleLike = async (req, res) => {
   try {
     const resource = await Resource.findById(req.params.id);
     if (!resource) return res.status(404).json({ success: false, message: 'Resource not found.' });
+    
+    // Explicit Authorization Check
+    if (!resource.isPublic && resource.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ success: false, message: 'Forbidden. Resource is private.' });
+    }
+
     const userId = req.user._id;
     const likeIndex = resource.likes.indexOf(userId);
     if (likeIndex === -1) { resource.likes.push(userId); } else { resource.likes.splice(likeIndex, 1); }

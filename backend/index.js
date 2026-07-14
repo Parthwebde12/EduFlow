@@ -34,10 +34,9 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Eduflow API is running' });
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({ success: false, message: err.message || 'Internal Server Error' });
-});
+const errorHandler = require('./middleware/errorHandler');
+
+app.use(errorHandler);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });

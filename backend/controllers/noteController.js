@@ -18,8 +18,14 @@ const getNotes = async (req, res) => {
 
 const getNote = async (req, res) => {
   try {
-    const note = await Note.findOne({ _id: req.params.id, owner: req.user._id });
+    const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ success: false, message: 'Note not found.' });
+    
+    // Explicit Authorization Check
+    if (!note.isPublic && note.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ success: false, message: 'Forbidden. Note is private.' });
+    }
+    
     res.json({ success: true, note });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to fetch note.' });
@@ -78,8 +84,14 @@ const deleteNote = async (req, res) => {
 
 const trackDownload = async (req, res) => {
   try {
-    const note = await Note.findOne({ _id: req.params.id, $or: [{ owner: req.user._id }, { isPublic: true }] });
+    const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ success: false, message: 'Note not found.' });
+
+    // Explicit Authorization Check
+    if (!note.isPublic && note.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ success: false, message: 'Forbidden. Note is private.' });
+    }
+
     note.downloads += 1;
     await note.save();
     res.json({ success: true, downloadUrl: note.file.url });
