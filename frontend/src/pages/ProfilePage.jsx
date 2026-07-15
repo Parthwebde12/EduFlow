@@ -106,24 +106,24 @@ export default function ProfilePage() {
         </h3>
         <form onSubmit={handleProfileSave} className="space-y-4">
           <div>
-            <label className="label">Full Name</label>
-            <input className="input" value={form.name}
+            <label htmlFor="profile-name" className="label">Full Name</label>
+            <input id="profile-name" className="input" value={form.name}
               onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required />
           </div>
           <div>
-            <label className="label flex items-center gap-1.5"><Building size={13} /> College / University</label>
-            <input className="input" placeholder="Your university..." value={form.college}
+            <label htmlFor="profile-college" className="label flex items-center gap-1.5"><Building size={13} /> College / University</label>
+            <input id="profile-college" className="input" placeholder="Your university..." value={form.college}
               onChange={e => setForm(f => ({ ...f, college: e.target.value }))} />
           </div>
           <div>
-            <label className="label flex items-center gap-1.5"><BookOpen size={13} /> Bio</label>
-            <textarea className="input resize-none" rows={3} placeholder="Tell the community about yourself..."
+            <label htmlFor="profile-bio" className="label flex items-center gap-1.5"><BookOpen size={13} /> Bio</label>
+            <textarea id="profile-bio" className="input resize-none" rows={3} placeholder="Tell the community about yourself..."
               value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} maxLength={200} />
             <p className="text-xs text-slate-400 mt-1">{form.bio.length}/200</p>
           </div>
           <div>
-            <label className="label flex items-center gap-1.5"><Tag size={13} /> Skills (comma-separated)</label>
-            <input className="input" placeholder="e.g. Python, Machine Learning, Data Analysis"
+            <label htmlFor="profile-skills" className="label flex items-center gap-1.5"><Tag size={13} /> Skills (comma-separated)</label>
+            <input id="profile-skills" className="input" placeholder="e.g. Python, Machine Learning, Data Analysis"
               value={form.skills} onChange={e => setForm(f => ({ ...f, skills: e.target.value }))} />
           </div>
           <button type="submit" disabled={saving} className="btn-primary flex items-center gap-2">
@@ -154,6 +154,18 @@ export default function ProfilePage() {
         <form onSubmit={handlePasswordChange} className="space-y-4">
           <div>
             <label htmlFor="profile-current-password" className="label">Current Password</label>
+            <input id="profile-current-password" type="password" className="input" value={pwForm.currentPassword}
+              onChange={e => setPwForm(f => ({ ...f, currentPassword: e.target.value }))} required />
+          </div>
+          <div>
+            <label htmlFor="profile-new-password" className="label">New Password</label>
+            <input id="profile-new-password" type="password" className="input" placeholder="Min. 6 characters" value={pwForm.newPassword}
+              onChange={e => setPwForm(f => ({ ...f, newPassword: e.target.value }))} required />
+          </div>
+          <div>
+            <label htmlFor="profile-confirm-password" className="label">Confirm New Password</label>
+            <input id="profile-confirm-password" type="password" className="input" value={pwForm.confirm}
+              onChange={e => setPwForm(f => ({ ...f, confirm: e.target.value }))} required />
             <div className="relative">
               <input id="profile-current-password" type={showPw.current ? 'text' : 'password'} className="input pr-12" value={pwForm.currentPassword}
                 onChange={e => setPwForm(f => ({ ...f, currentPassword: e.target.value }))} required />
