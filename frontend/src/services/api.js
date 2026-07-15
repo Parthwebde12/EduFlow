@@ -13,10 +13,15 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('Eduflow_token');
-      window.location.href = '/login';
+    const isLoginRequest =
+      error.config?.method?.toLowerCase() === "post" &&
+      error.config?.url?.endsWith("/auth/login");
+
+    if (error.response?.status === 401 && !isLoginRequest) {
+      localStorage.removeItem("Eduflow_token");
+      window.location.href = "/login";
     }
+
     return Promise.reject(error);
   }
 );
