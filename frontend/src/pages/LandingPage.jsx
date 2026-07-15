@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  GraduationCap, 
-  Menu, 
-  X, 
-  FileText, 
-  CheckSquare, 
-  BookOpen, 
-  TrendingUp, 
+import { useTheme } from '../context/ThemeContext';
+import {
+  GraduationCap,
+  Menu,
+  X,
+  FileText,
+  CheckSquare,
+  BookOpen,
+  TrendingUp,
   ArrowRight,
   LayoutDashboard,
   Plus,
@@ -16,13 +17,17 @@ import {
   Flame,
   Clock,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  Moon,
+  Sun,
+  Stars
 } from 'lucide-react';
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,9 +60,10 @@ export default function LandingPage() {
     },
   ];
 
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans selection:bg-red-500/30">
-      
+
       {/* Background gradients similar to Login Page */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-100 dark:bg-primary-900/20 rounded-full blur-3xl opacity-60 animate-fade-in" />
@@ -65,12 +71,11 @@ export default function LandingPage() {
       </div>
 
       {/* Navbar */}
-      <header 
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 py-3 shadow-sm' 
-            : 'bg-transparent py-5'
-        }`}
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 py-3 shadow-sm'
+          : 'bg-transparent py-5'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -97,9 +102,74 @@ export default function LandingPage() {
                 Get Started
               </Link>
             </div>
+            <div>
+              {/* Toggle theme button */}
+              <button
+                onClick={toggleTheme}
+                className="
+                  group
+                  relative
+                  flex
+                  h-10 w-20
+                  sm:h-11 sm:w-22
+                  items-center
+                  rounded-full
+                  border border-white/20
+                  bg-white/10
+                  backdrop-blur-xl
+                  p-1
+                  shadow-lg
+                  transition-all
+                  duration-500
+                  hover:scale-105
+                  hover:shadow-cyan-500/20
+                  dark:bg-white/5
+                  overflow-hidden
+                "
+              >
+                {/* Background Glow */}
+                <div
+                  className={`absolute inset-0 rounded-full transition-all duration-500
+                    ${isDark
+                      ? "bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-900"
+                      : "bg-gradient-to-r from-white via-slate-100 to-cyan-100"
+                    }
+                  `}
+                />
+
+                {/* Floating Stars */}
+                <Stars
+                  className={`absolute right-3 h-3.5 w-3.5 text-white transition-all duration-500
+                    ${isDark ? "opacity-100 rotate-0" : "opacity-0 rotate-180"}
+                  `}
+                />
+
+                {/* Sliding Circle */}
+                <div
+                  className={`
+                    absolute z-10
+                    flex h-8 w-8
+                    items-center 
+                    justify-center
+                    rounded-full
+                    bg-white
+                    shadow-md
+                    transition-all
+                    duration-500
+                    ease-in-out
+                    ${isDark ? "translate-x-10" : "translate-x-0"}
+                  `}
+                >
+                  {isDark ? 
+                    (<Moon className="h-4.5 w-4.5 text-slate-800 transition-transform duration-300 group-hover:rotate-12" />) 
+                    : (<Sun className="h-4.5 w-4.5 text-amber-500 transition-transform duration-500 group-hover:rotate-180" />)
+                  }
+                </div>
+              </button>
+            </div>
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="md:hidden p-2 text-slate-600 dark:text-slate-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
@@ -124,7 +194,7 @@ export default function LandingPage() {
       </header>
 
       <main className="relative z-10 pt-32 pb-16">
-        
+
         {/* Hero Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 md:pt-20 md:pb-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -140,13 +210,13 @@ export default function LandingPage() {
                 Manage notes, resources, and tasks in one place so you can focus on learning instead of managing multiple apps.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button 
+                <button
                   onClick={() => navigate('/register')}
                   className="btn-primary py-3 px-6 text-base shadow-red-500/25 hover:shadow-red-500/40 w-full sm:w-auto justify-center"
                 >
                   Get Started <ArrowRight className="w-4 h-4 ml-1" />
                 </button>
-                <button 
+                <button
                   onClick={() => navigate('/login')}
                   className="btn-secondary py-3 px-6 text-base w-full sm:w-auto justify-center"
                 >
@@ -158,9 +228,9 @@ export default function LandingPage() {
             {/* Hero Illustration / Detailed Dashboard Preview */}
             <div className="relative w-full h-[500px] lg:h-[600px] rounded-2xl animate-scale-in flex items-center justify-center text-left">
               <div className="absolute inset-0 bg-linear-to-tr from-red-500/10 to-orange-500/10 dark:from-red-500/5 dark:to-orange-500/5 rounded-3xl transform rotate-3 scale-105 transition-transform duration-700 hover:rotate-6"></div>
-              
+
               <div className="relative w-full h-full glass rounded-2xl border border-white/60 dark:border-slate-800/60 shadow-2xl flex overflow-hidden group bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl animate-tilt-glow">
-                
+
                 {/* Mock Sidebar */}
                 <div className="hidden sm:flex w-48 lg:w-56 flex-col border-r border-slate-200/50 dark:border-slate-700/30 bg-white/50 dark:bg-slate-900/50 p-4">
                   <div className="flex items-center gap-2 mb-8">
@@ -169,7 +239,7 @@ export default function LandingPage() {
                     </div>
                     <span className="font-bold text-slate-900 dark:text-white">EduFlow</span>
                   </div>
-                  
+
                   <div className="space-y-1 flex-1">
                     <div className="flex items-center gap-3 px-3 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm font-medium">
                       <LayoutDashboard className="w-4 h-4" /> Dashboard
@@ -203,7 +273,7 @@ export default function LandingPage() {
 
                   {/* Dashboard Body */}
                   <div className="flex-1 p-6 overflow-y-auto custom-scroll space-y-6">
-                    
+
                     {/* Hero Greeting */}
                     <div className="bg-linear-to-r from-red-500 to-orange-500 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-500">
                       <div className="relative z-10">
@@ -238,7 +308,7 @@ export default function LandingPage() {
                           <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Upload</span>
                         </div>
                       </div>
-                      
+
                       {/* Study Streak */}
                       <div className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col items-center justify-center relative overflow-hidden group-hover:scale-[1.02] transition-transform">
                         <div className="absolute -right-4 -top-4 w-16 h-16 bg-orange-500/10 rounded-full blur-xl"></div>
@@ -250,7 +320,7 @@ export default function LandingPage() {
 
                     {/* Bottom Split: Activity & Deadlines */}
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                      
+
                       {/* Empty State / Recent Activity */}
                       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm p-5 flex flex-col">
                         <div className="flex justify-between items-center mb-4">
@@ -276,7 +346,7 @@ export default function LandingPage() {
                           <h3 className="font-semibold text-sm text-slate-800 dark:text-white">Upcoming Deadlines</h3>
                           <Calendar className="w-4 h-4 text-slate-400" />
                         </div>
-                        
+
                         <div className="space-y-3">
                           <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100/50 dark:border-slate-700/50 hover:border-orange-200 dark:hover:border-orange-900 transition-colors cursor-pointer">
                             <div className="w-2 h-8 bg-orange-500 rounded-full"></div>
@@ -287,7 +357,7 @@ export default function LandingPage() {
                               </div>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-100/50 dark:border-slate-700/50 hover:border-red-200 dark:hover:border-red-900 transition-colors cursor-pointer">
                             <div className="w-2 h-8 bg-red-500 rounded-full"></div>
                             <div className="flex-1">
@@ -300,20 +370,20 @@ export default function LandingPage() {
                         </div>
 
                         <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-                           <div className="flex justify-between text-xs font-semibold mb-1">
-                             <span className="text-slate-600 dark:text-slate-400">Weekly Progress</span>
-                             <span className="text-red-500">65%</span>
-                           </div>
-                           <div className="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                             <div className="bg-linear-to-r from-red-500 to-orange-500 h-full rounded-full w-[65%]"></div>
-                           </div>
+                          <div className="flex justify-between text-xs font-semibold mb-1">
+                            <span className="text-slate-600 dark:text-slate-400">Weekly Progress</span>
+                            <span className="text-red-500">65%</span>
+                          </div>
+                          <div className="w-full bg-slate-100 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                            <div className="bg-linear-to-r from-red-500 to-orange-500 h-full rounded-full w-[65%]"></div>
+                          </div>
                         </div>
                       </div>
 
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Floating decor */}
                 <div className="absolute -right-12 -bottom-12 w-40 h-40 bg-orange-400/20 blur-3xl rounded-full pointer-events-none"></div>
                 <div className="absolute -left-12 top-1/3 w-32 h-32 bg-red-400/20 blur-3xl rounded-full pointer-events-none"></div>
@@ -331,11 +401,11 @@ export default function LandingPage() {
                 A complete suite of tools designed specifically to help you manage your academic journey.
               </p>
             </div>
-            
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="card-hover p-6 group"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -378,7 +448,7 @@ export default function LandingPage() {
                         <span className="font-medium text-slate-700 dark:text-slate-300">{item.label}</span>
                       </div>
                       <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-linear-to-r from-red-500 to-orange-500 rounded-full transition-all duration-1000 ease-out group-hover:opacity-80"
                           style={{ width: item.progress }}
                         ></div>
@@ -426,13 +496,13 @@ export default function LandingPage() {
                 Create your free account today and start managing everything from one perfectly designed place.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
+                <button
                   onClick={() => navigate('/register')}
                   className="btn-primary py-3 px-8 text-base shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                 >
                   Get Started
                 </button>
-                <button 
+                <button
                   onClick={() => navigate('/login')}
                   className="btn-secondary py-3 px-8 text-base"
                 >
@@ -459,7 +529,7 @@ export default function LandingPage() {
                 Student Productivity Platform designed to help you manage notes, tasks, and resources all in one seamless experience.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-slate-900 dark:text-white mb-4 uppercase text-xs tracking-wider">Platform</h4>
               <ul className="space-y-3">
@@ -467,7 +537,7 @@ export default function LandingPage() {
                 <li><a href="#about" className="text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">About</a></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-slate-900 dark:text-white mb-4 uppercase text-xs tracking-wider">Account</h4>
               <ul className="space-y-3">
@@ -476,7 +546,7 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          
+
           <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-500 dark:text-slate-400 text-sm">
               &copy; {new Date().getFullYear()} EduFlow. All rights reserved.
