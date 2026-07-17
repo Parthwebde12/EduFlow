@@ -59,8 +59,7 @@ maxlength:[100,'Title should not exceed 100 characters']
          owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
-    index: true // <-- Add this line!
+    required: true
 }
         }, {
           timestamps: true
