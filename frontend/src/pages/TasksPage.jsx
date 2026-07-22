@@ -21,18 +21,35 @@ const priorityClasses = {
   urgent: 'priority-urgent',
 };
 
-function TaskCard({ task, onEdit, onDelete, onStatusToggle, listView }) {
+function TaskCard({
+  task,
+  onEdit,
+  onDelete,
+  onStatusToggle,
+  listView,
+  draggable,
+  onDragStart,
+  onDragEnd,
+  isDragging,
+}) {
   const isOverdue = task.dueDate && isPast(new Date(task.dueDate)) && task.status !== 'done';
   const dueSoon   = task.dueDate && isToday(new Date(task.dueDate));
 
   return (
     <div
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
       className={`
         bg-white dark:bg-slate-800 rounded-xl p-3.5
-        border border-slate-100 dark:border-slate-700
-        hover:shadow-sm transition-all
+        border transition-all
+        ${isDragging
+          ? 'opacity-40 border-dashed border-2 border-primary-500 scale-95 shadow-md'
+          : 'border-slate-100 dark:border-slate-700 hover:shadow-sm'
+        }
         ${task.status === 'done' ? 'opacity-70' : ''}
         ${listView ? 'flex items-center gap-3' : ''}
+        ${draggable ? 'cursor-grab active:cursor-grabbing' : ''}
       `}
     >
       <button
@@ -133,6 +150,57 @@ export default function TasksPage() {
     title: '', description: '', priority: 'medium',
     status: 'todo', dueDate: '', subject: '',
   });
+
+  const [draggingTaskId, setDraggingTaskId] = useState(null);
+  const [dragOverStatus, setDragOverStatus] = useState(null);
+
+  const handleDragStart = (e, task) => {
+    e.dataTransfer.setData('text/plain', task._id);
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => {
+      setDraggingTaskId(task._id);
+    }, 0);
+  };
+
+  const handleDragEnd = () => {
+    setDraggingTaskId(null);
+    setDragOverStatus(null);
+  };
+
+  const handleDragOver = (e, status) => {
+    e.preventDefault();
+    setDragOverStatus(status);
+  };
+
+  const handleDragLeave = () => {
+    setDragOverStatus(null);
+  };
+
+  const handleDrop = async (e, targetStatus) => {
+    e.preventDefault();
+    setDragOverStatus(null);
+    setDraggingTaskId(null);
+
+    const taskId = draggingTaskId || e.dataTransfer.getData('text/plain');
+    if (!taskId) return;
+
+    const taskToMove = tasks.find(t => t._id === taskId);
+    if (!taskToMove) return;
+
+    if (taskToMove.status === targetStatus) return;
+
+    // Optimistic update
+    setTasks(prev => prev.map(t => t._id === taskId ? { ...t, status: targetStatus } : t));
+
+    try {
+      await tasksService.update(taskId, { status: targetStatus });
+      toast.success(`Task moved to ${STATUS_LABELS[targetStatus]}`);
+    } catch {
+      // Revert state
+      setTasks(prev => prev.map(t => t._id === taskId ? { ...t, status: taskToMove.status } : t));
+      toast.error('Failed to move task');
+    }
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -283,7 +351,20 @@ export default function TasksPage() {
       ) : activeFilter === 'all' ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {STATUSES.map(status => (
-            <div key={status} className="bg-slate-100 dark:bg-slate-800/50 rounded-2xl p-3">
+            <div
+              key={status}
+              onDragOver={(e) => handleDragOver(e, status)}
+              onDragLeave={handleDragLeave}
+              onDrop={(e) => handleDrop(e, status)}
+              className={`
+                bg-slate-100 dark:bg-slate-800/50 rounded-2xl p-3
+                border-2 transition-all duration-200
+                ${dragOverStatus === status
+                  ? 'border-dashed border-primary-500 bg-primary-50/20 dark:bg-primary-950/10'
+                  : 'border-transparent'
+                }
+              `}
+            >
               <div className="flex items-center justify-between mb-3 px-1">
                 <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                   {STATUS_LABELS[status]}
@@ -303,6 +384,10 @@ export default function TasksPage() {
                       onEdit={openEdit}
                       onDelete={handleDeleteRequest}
                       onStatusToggle={handleStatusToggle}
+                      draggable={true}
+                      onDragStart={(e) => handleDragStart(e, task)}
+                      onDragEnd={handleDragEnd}
+                      isDragging={draggingTaskId === task._id}
                     />
                   ))
                 )}
