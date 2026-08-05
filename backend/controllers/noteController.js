@@ -1,4 +1,5 @@
 const Note = require('../models/Note');
+const Notification = require('../models/Notifications');
 const { cloudinary } = require('../config/cloudinary');
 
 const getNotes = async (req, res) => {
@@ -36,6 +37,13 @@ const uploadNote = async (req, res) => {
       tags: tags ? tags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean) : [],
       file: { url: req.file.path, publicId: req.file.filename, originalName: req.file.originalname, fileType, size: req.file.size || 0 },
       isPublic: isPublic === 'true',
+      owner: req.user._id
+    });
+
+    await Notification.create({
+      title: 'Note Uploaded',
+      message: `Your note "${title}" has been successfully uploaded.`,
+      type: 'resources',
       owner: req.user._id
     });
     res.status(201).json({ success: true, message: 'Note uploaded successfully!', note });

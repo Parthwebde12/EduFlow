@@ -1,10 +1,22 @@
 import { Menu, Sun, Moon, Bell } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/Authcontext";
+import NotificationsPanel from "../layout/NotificationsPanel";
+import { useState, useEffect } from "react";
+import { getNotifications } from "../../services/notifications";
 
 export default function Topbar({ onMenuClick, pageTitle }) {
   const { toggleTheme, isDark } = useTheme();
   const { user } = useAuth();
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  useEffect(() => {
+    getNotifications()
+      .then((response) => setNotifications(response.data.notifications))
+      .catch((error) => console.error("Error fetching notifications:", error));
+  }, []);
+
+  const unreadCount = notifications.filter((notif) => !notif.isRead).length;
 
   return (
     <header className="h-16 glass border-b border-slate-100 dark:border-red-950 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-20">
@@ -37,15 +49,29 @@ export default function Topbar({ onMenuClick, pageTitle }) {
           )}
         </button>
 
-        
-        <button
-          className="btn-ghost p-2 rounded-xl relative"
-          aria-label="Notifications">
-          <Bell size={18} />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
-        </button>
+        <div className="relative">
+          <button
+            onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+            className="btn-ghost p-2 rounded-xl relative"
+            aria-label="Notifications"
+          >
+            <Bell size={18} />
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+              </span>
+            )}
+          </button>
 
-        
+          {isNotificationsOpen && (
+            <NotificationsPanel
+              notifications={notifications}
+              setNotifications={setNotifications}
+              onClose={() => setIsNotificationsOpen(false)}
+            />
+          )}
+        </div>
         <div className="w-8 h-8 rounded-full bg-linear-to-br from-red-400 to-red-600 flex items-center justify-center text-white font-semibold ml-1 overflow-hidden">
           {user?.profilePhoto?.url
             ? <img src={user.profilePhoto.url} alt={user.name} className="w-full h-full object-cover" />
