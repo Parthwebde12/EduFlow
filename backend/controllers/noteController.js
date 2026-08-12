@@ -88,6 +88,13 @@ const trackDownload = async (req, res) => {
   try {
     const note = await Note.findOne({ _id: req.params.id, $or: [{ owner: req.user._id }, { isPublic: true }] });
     if (!note) return res.status(404).json({ success: false, message: 'Note not found.' });
+
+    // Authorization check: user must own the note OR the note must be public
+    const isOwner = note.owner.toString() === req.user._id.toString();
+    if (!note.isPublic && !isOwner) {
+      return res.status(403).json({ success: false, message: 'Access denied.' });
+    }
+
     note.downloads += 1;
     await note.save();
     res.json({ success: true, downloadUrl: note.file.url });

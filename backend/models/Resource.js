@@ -59,17 +59,18 @@ maxlength:[100,'Title should not exceed 100 characters']
          owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
-    index: true // <-- Add this line!
+    required: true
 }
         }, {
           timestamps: true
         });
 
 
-        resourceSchema.index({title:'text',description:'text',subject:'text',
-            tags:'text'
-        })
+        resourceSchema.index({ title: 'text', description: 'text', subject: 'text', tags: 'text' });
+
+        // Index on owner field to optimise all owner-based queries
+        // (e.g. fetching, filtering, and deleting a user's resources)
+        resourceSchema.index({ owner: 1 });
 
 
         module.exports = mongoose.model('Resource', resourceSchema)
