@@ -16,9 +16,11 @@ const userRoutes = require('./routes/users');
 const app = express();
 
 app.use(helmet());
+
+const allowedOrigins=["https://edu-flow-xi-five.vercel.app"]
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+    if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:') || origin.startsWith('http://[::1]:') || origin.startsWith('http://127.0.0.1:')) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
