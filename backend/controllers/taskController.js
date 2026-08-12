@@ -1,4 +1,5 @@
 const Task = require('../models/Task');
+const Notification = require('../models/Notifications');
 
 const getTasks = async (req, res) => {
   try {
@@ -24,6 +25,13 @@ const createTask = async (req, res) => {
       dueDate: dueDate || null,
       subject: subject || '',
       tags: tags ? tags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean) : [],
+      owner: req.user._id
+    });
+
+    await Notification.create({
+      title: 'New Task Created',
+      message: `You have successfully created the task: "${title}".`,
+      type: 'task',
       owner: req.user._id
     });
     res.status(201).json({ success: true, message: 'Task created successfully!', task });

@@ -1,4 +1,5 @@
 const Resource = require('../models/Resource');
+const Notification = require('../models/Notifications');
 const { cloudinary } = require('../config/cloudinary');
 
 const getResources = async (req, res) => {
@@ -32,6 +33,13 @@ const createResource = async (req, res) => {
     }
     const resource = await Resource.create(resourceData);
     await resource.populate('owner', 'name profilePhoto');
+
+    await Notification.create({
+      title: 'Resource Shared',
+      message: `Your resource "${title}" has been successfully shared.`,
+      type: 'resources',
+      owner: req.user._id
+    });
     res.status(201).json({ success: true, message: 'Resource shared successfully!', resource });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to create resource.', error: error.message });

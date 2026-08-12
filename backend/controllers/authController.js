@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Notification = require('../models/Notifications');
 const { generateToken } = require('../middleware/auth');
 
 const register = async (req, res) => {
@@ -19,6 +20,13 @@ const register = async (req, res) => {
       email,
       password,
       college: college || ''
+    });
+
+    await Notification.create({
+      title: 'Welcome to EduFlow!',
+      message: 'We are excited to have you on board. Start exploring tasks and resources!',
+      type: 'system',
+      owner: user._id
     });
 
     const token = generateToken(user._id);

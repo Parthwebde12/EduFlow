@@ -12,6 +12,7 @@ const notesRoutes = require('./routes/notes');
 const resourcesRoutes = require('./routes/resources');
 const taskRoutes = require('./routes/task');
 const userRoutes = require('./routes/users');
+const notificationsRoutes = require('./routes/notifications');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/api/notes', notesRoutes);
 app.use('/api/resources', resourcesRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/notifications', notificationsRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Eduflow API is running' });
