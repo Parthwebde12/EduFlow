@@ -1,11 +1,12 @@
 const express = require('express');
 const { getNotes, getNote, uploadNote, updateNote, deleteNote, trackDownload } = require('../controllers/noteController');
 const { protect } = require('../middleware/auth');
+const { cache } = require('../middleware/cache');
 const { uploadNote: uploadNoteFile } = require('../config/cloudinary');
 const router = express.Router();
 router.use(protect);
-router.get('/', getNotes);
-router.get('/:id', getNote);
+router.get('/', cache('notes'), getNotes);
+router.get('/:id', cache('notes'), getNote);
 router.post('/', uploadNoteFile.single('file'), uploadNote);
 router.put('/:id', updateNote);
 router.delete('/:id', deleteNote);
