@@ -1,6 +1,7 @@
 const Resource = require('../models/Resource');
 const Notification = require('../models/Notifications');
 const { cloudinary } = require('../config/cloudinary');
+const { clearCache } = require('../middleware/cache');
 
 const getResources = async (req, res) => {
   try {
@@ -41,6 +42,7 @@ const createResource = async (req, res) => {
       owner: req.user._id
     });
     res.status(201).json({ success: true, message: 'Resource shared successfully!', resource });
+    await clearCache(req.user._id, 'resources');
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to create resource.', error: error.message });
   }
@@ -55,6 +57,7 @@ const toggleLike = async (req, res) => {
     if (likeIndex === -1) { resource.likes.push(userId); } else { resource.likes.splice(likeIndex, 1); }
     await resource.save();
     res.json({ success: true, liked: likeIndex === -1, likesCount: resource.likes.length });
+    await clearCache(req.user._id, 'resources');
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to toggle like.' });
   }
@@ -72,6 +75,7 @@ const deleteResource = async (req, res) => {
     
     await resource.deleteOne();
     res.json({ success: true, message: 'Resource deleted successfully!' });
+    await clearCache(req.user._id, 'resources');
   } catch (error) {
     console.error('DELETE RESOURCE ERROR:', error);
     res.status(500).json({ success: false, message: 'Failed to delete resource.' });

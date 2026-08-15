@@ -1,6 +1,7 @@
 const Note = require('../models/Note');
 const Notification = require('../models/Notifications');
 const { cloudinary } = require('../config/cloudinary');
+const { clearCache } = require('../middleware/cache');
 
 const getNotes = async (req, res) => {
   try {
@@ -47,6 +48,7 @@ const uploadNote = async (req, res) => {
       owner: req.user._id
     });
     res.status(201).json({ success: true, message: 'Note uploaded successfully!', note });
+    await clearCache(req.user._id, 'notes');
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to upload note.', error: error.message });
   }
@@ -64,6 +66,7 @@ const updateNote = async (req, res) => {
     if (isPublic !== undefined) note.isPublic = isPublic === 'true' || isPublic === true;
     await note.save();
     res.json({ success: true, message: 'Note updated successfully!', note });
+    await clearCache(req.user._id, 'notes');
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to update note.' });
   }
@@ -79,6 +82,7 @@ const deleteNote = async (req, res) => {
 }
     await note.deleteOne();
     res.json({ success: true, message: 'Note deleted successfully!' });
+    await clearCache(req.user._id, 'notes');
   } catch (error) {
     res.status(500).json({ success: false, message: 'Failed to delete note.' });
   }
